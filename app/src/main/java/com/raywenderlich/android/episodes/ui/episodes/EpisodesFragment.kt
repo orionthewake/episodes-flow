@@ -10,13 +10,9 @@ import com.raywenderlich.android.episodes.R
 import com.raywenderlich.android.episodes.databinding.EpisodesFragmentBinding
 import com.raywenderlich.android.episodes.di.Injectable
 import com.raywenderlich.android.episodes.ui.injectViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 class EpisodesFragment : Fragment(), Injectable {
 
   @Inject

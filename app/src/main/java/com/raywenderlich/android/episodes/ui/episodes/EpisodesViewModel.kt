@@ -6,15 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raywenderlich.android.episodes.model.EpisodeRepository
 import com.raywenderlich.android.episodes.model.Trilogy
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-@FlowPreview
-@ExperimentalCoroutinesApi
 class EpisodesViewModel @Inject constructor(
   private val episodeRepository: EpisodeRepository
 ) : ViewModel() {
