@@ -10,26 +10,19 @@ import com.raywenderlich.android.episodes.R
 import com.raywenderlich.android.episodes.databinding.EpisodesFragmentBinding
 import com.raywenderlich.android.episodes.di.Injectable
 import com.raywenderlich.android.episodes.ui.injectViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class EpisodesFragment : Fragment(), Injectable, CoroutineScope {
-
-  private var job: Job = Job()
+class EpisodesFragment : Fragment(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
 
   private lateinit var viewModel: EpisodesViewModel
-
-  override val coroutineContext: CoroutineContext
-    get() = Dispatchers.Main + job
-
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -54,17 +47,9 @@ class EpisodesFragment : Fragment(), Injectable, CoroutineScope {
 
     val adapter = EpisodeAdapter()
     binding.episodeList.adapter = adapter
-    launch {
-      subscribeUi(adapter)
-    }
 
     setHasOptionsMenu(true)
     return binding.root
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    job.cancel()
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -90,12 +75,6 @@ class EpisodesFragment : Fragment(), Injectable, CoroutineScope {
         true
       }
       else -> super.onOptionsItemSelected(item)
-    }
-  }
-
-  private suspend fun subscribeUi(adapter: EpisodeAdapter) {
-    viewModel.episodesUsingFlow.collect { episodes ->
-      adapter.submitList(episodes)
     }
   }
 
