@@ -6,11 +6,13 @@ import com.raywenderlich.android.episodes.model.network.EpisodeRemoteDataSource
 import com.raywenderlich.android.episodes.utils.ComparablePair
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@ExperimentalCoroutinesApi
 @Singleton
 class EpisodeRepository @Inject constructor(
   private val episodeDao: EpisodeDao,
