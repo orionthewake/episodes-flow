@@ -75,9 +75,7 @@ class EpisodesFragment : Fragment(), Injectable {
   }
 
   private fun filterData(num: Int) {
-    with(viewModel) {
-      setTrilogyNumber(num)
-    }
+    viewModel.setTrilogyNumber(num)
   }
 
 }
