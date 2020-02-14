@@ -100,9 +100,7 @@ class EpisodesFragment : Fragment(), Injectable, CoroutineScope {
   }
 
   private fun filterData(num: Int) {
-    with(viewModel) {
-      setTrilogyNumber(num)
-    }
+    viewModel.setTrilogyNumber(num)
   }
 
 }
