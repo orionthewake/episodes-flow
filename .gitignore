@@ -88,4 +88,5 @@ lint/tmp/
 # Custom
 #
 .DS_Store
+gitupdate.sh
 
