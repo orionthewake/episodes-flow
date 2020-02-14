@@ -73,7 +73,7 @@ class EpisodeRepository @Inject constructor(
 
   @AnyThread
   suspend fun List<Episode>.applyMainSafeSort(favoritesSortOrder: List<String>) =
-      withContext(defaultDispatcher) {
-        this@applyMainSafeSort.applySort(favoritesSortOrder)
-      }
+    withContext(defaultDispatcher) {
+      this@applyMainSafeSort.applySort(favoritesSortOrder)
+    }
 }
