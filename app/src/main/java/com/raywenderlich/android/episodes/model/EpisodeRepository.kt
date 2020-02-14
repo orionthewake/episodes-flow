@@ -18,7 +18,7 @@ class EpisodeRepository @Inject constructor(
   private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
 
-  private lateinit var favoritesSortOrder: List<String>
+  private var favoritesSortOrder: List<String> = listOf()
 
   val episodesFlow: Flow<List<Episode>>
     get() = episodeDao.loadAllEpisodesFlow()
