@@ -89,4 +89,6 @@ lint/tmp/
 #
 .DS_Store
 gitupdate.sh
+setup_demo.py
+
 
