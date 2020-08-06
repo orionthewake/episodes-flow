@@ -38,32 +38,25 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import com.raywenderlich.android.episodes.R
 import com.raywenderlich.android.episodes.databinding.EpisodesFragmentBinding
 import com.raywenderlich.android.episodes.di.Injectable
 import com.raywenderlich.android.episodes.ui.injectViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 
-class EpisodesFragment : Fragment(), Injectable, CoroutineScope {
-
-  private var job = Job()
+class EpisodesFragment : Fragment(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
 
   private lateinit var viewModel: EpisodesViewModel
-
-  override val coroutineContext: CoroutineContext
-    get() = Dispatchers.Main + job
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -88,17 +81,12 @@ class EpisodesFragment : Fragment(), Injectable, CoroutineScope {
 
     val adapter = EpisodeAdapter()
     binding.episodeList.adapter = adapter
-    launch {
+    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
       subscribeUi(adapter)
     }
 
     setHasOptionsMenu(true)
     return binding.root
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    job.cancel()
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
